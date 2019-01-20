@@ -12,7 +12,7 @@ var RadarChart = {
     draw: function (id, d, options) {
         var cfg = {
             radius: 5,
-            w: 600,
+            w: 900,
             h: 600,
             factor: 1,
             factorLegend: .85,
@@ -45,7 +45,7 @@ var RadarChart = {
         }));
         var total = allAxis.length;
         var radius = cfg.factor * Math.min(cfg.w / 2, cfg.h / 2);
-        var Format = d3.format('%');
+        var Format = d3.format('');
         d3.select(id).select("svg").remove();
 
         var g = d3.select(id)
@@ -54,12 +54,11 @@ var RadarChart = {
             .attr("height", cfg.h + cfg.ExtraWidthY)
             .append("g")
             .attr("transform", "translate(" + cfg.TranslateX + "," + cfg.TranslateY + ")");
-        ;
 
         var tooltip;
 
         //Circular segments
-        for (var j = 0; j < cfg.levels - 1; j++) {
+        for (var j = 0; j < cfg.levels; j++) {
             var levelFactor = cfg.factor * radius * ((j + 1) / cfg.levels);
             g.selectAll(".levels")
                 .data(allAxis)
@@ -264,52 +263,52 @@ var w = 500,
 var colorscale = d3.scale.category10();
 
 //Legend titles
-var LegendOptions = ['Smartphone', 'Tablet'];
+var LegendOptions = ['Current', 'Future'];
 
 //Data
 var d = [
     [
-        {axis: "Emotional Intelligence", value: 0.59},
-        {axis: "Influencing", value: 0.56},
-        {axis: "Actively develops others", value: 0.42},
-        {axis: "Uses effective facilitation", value: 0.34},
-        {axis: "Actively builds team", value: 0.48},
-        {axis: "Active risk management", value: 0.14},
-        {axis: "Open communication", value: 0.11},
-        {axis: "Good coding skills", value: 0.05},
-        {axis: "Experience in full stack", value: 0.07},
-        {axis: "Pattern aware", value: 0.12},
-        {axis: "Current knowledge of codebase", value: 0.27},
-        {axis: "Continuous improvement", value: 0.03},
-        {axis: "Clarity of problem", value: 0.12},
-        {axis: "Business value focused", value: 0.4},
-        {axis: "Communication bridge", value: 0.03},
-        {axis: "Architectural vision", value: 0.22},
-        {axis: "Focus on principles", value: 0.03},
-        {axis: "Systems, not software", value: 0.03},
-        {axis: "Champions Cross-Functional Requirements", value: 0.07},
-        {axis: "Future thinking", value: 0.18}
+        {axis: "Emotional Intelligence", value: 5},
+        {axis: "Influencing", value: 4},
+        {axis: "Actively develops others", value: 3},
+        {axis: "Uses effective facilitation", value: 3},
+        {axis: "Actively builds team", value: 3},
+        {axis: "Active risk management", value: 2},
+        {axis: "Open communication", value: 5},
+        {axis: "Good coding skills", value: 4},
+        {axis: "Experience in full stack", value: 5},
+        {axis: "Pattern aware", value: 1},
+        {axis: "Current knowledge of codebase", value: 2},
+        {axis: "Continuous improvement", value: 3},
+        {axis: "Clarity of problem", value: 3},
+        {axis: "Business value focused", value: 4},
+        {axis: "Communication bridge", value: 4},
+        {axis: "Architectural vision", value: 3},
+        {axis: "Focus on principles", value: 5},
+        {axis: "Systems, not software", value: 5},
+        {axis: "Champions Cross-Functional Requirements", value: 5},
+        {axis: "Future thinking", value: 5}
     ], [
-        {axis: "Emotional Intelligence", value: 0.59},
-        {axis: "Influencing", value: 0.56},
-        {axis: "Actively develops others", value: 0.42},
-        {axis: "Uses effective facilitation", value: 0.34},
-        {axis: "Actively builds team", value: 0.48},
-        {axis: "Active risk management", value: 0.14},
-        {axis: "Open communication", value: 0.11},
-        {axis: "Good coding skills", value: 0.05},
-        {axis: "Experience in full stack", value: 0.07},
-        {axis: "Pattern aware", value: 0.12},
-        {axis: "Current knowledge of codebase", value: 0.27},
-        {axis: "Continuous improvement", value: 0.03},
-        {axis: "Clarity of problem", value: 0.12},
-        {axis: "Business value focused", value: 0.4},
-        {axis: "Communication bridge", value: 0.03},
-        {axis: "Architectural vision", value: 0.22},
-        {axis: "Focus on principles", value: 0.03},
-        {axis: "Systems, not software", value: 0.03},
-        {axis: "Champions Cross-Functional Requirements", value: 0.07},
-        {axis: "Future thinking", value: 0.18}
+        {axis: "Emotional Intelligence", value: 5},
+        {axis: "Influencing", value: 4},
+        {axis: "Actively develops others", value: 3},
+        {axis: "Uses effective facilitation", value: 3},
+        {axis: "Actively builds team", value: 3},
+        {axis: "Active risk management", value: 5},
+        {axis: "Open communication", value: 5},
+        {axis: "Good coding skills", value: 4},
+        {axis: "Experience in full stack", value: 5},
+        {axis: "Pattern aware", value: 3},
+        {axis: "Current knowledge of codebase", value: 3},
+        {axis: "Continuous improvement", value: 4},
+        {axis: "Clarity of problem", value: 4},
+        {axis: "Business value focused", value: 4},
+        {axis: "Communication bridge", value: 4},
+        {axis: "Architectural vision", value: 3},
+        {axis: "Focus on principles", value: 5},
+        {axis: "Systems, not software", value: 5},
+        {axis: "Champions Cross-Functional Requirements", value: 5},
+        {axis: "Future thinking", value: 5}
     ]
 ];
 
@@ -317,10 +316,10 @@ var d = [
 var mycfg = {
     w: w,
     h: h,
-    maxValue: 0.6,
-    levels: 6,
+    maxValue: 5,
+    levels: 5,
     ExtraWidthX: 300
-}
+};
 
 //Call function to draw the Radar chart
 //Will expect that data is in %'s
@@ -344,7 +343,7 @@ var text = svg.append("text")
     .attr("y", 10)
     .attr("font-size", "12px")
     .attr("fill", "#404040")
-    .text("What % of owners use a specific service in a week");
+    .text("Tech Lead Assessment");
 
 //Initiate Legend
 var legend = svg.append("g")
