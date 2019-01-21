@@ -28,8 +28,13 @@ function initForm() {
   var sectionsHtml = "";
   for (var i = 0; i < originDimensions.length; i++) {
     var dimension = originDimensions[i];
-    var id = dimension.toLocaleLowerCase().replace(/ /g, "-");
-    dimensions[id] = dimension;
+    var id = dimension.toLocaleLowerCase()
+      .replace(/,/g, "")
+      .replace(/ /g, "-");
+    dimensions[id] = {
+      id: id,
+      axis: dimension
+    };
     sectionsHtml = sectionsHtml + '  <section>\n' +
       '    <label for="' + id + '">' + dimension + '</label>\n' +
       '    <input id="' + id + '" type="range" min="0" max="5" step="1" data-orientation="horizontal">\n' +
@@ -44,6 +49,16 @@ initForm();
 
 function handleClick() {
   event.preventDefault();
-  // draw(document.getElementById("myVal").value)
-  drawChart();
+  var results = [];
+  var arr = Object.keys(dimensions);
+  for (var i = 0; i < arr.length; i++) {
+    var currentDimension = dimensions[arr[i]];
+    console.log(currentDimension, arr[i]);
+    var value = document.getElementById(arr[i]).value;
+    results.push({
+      axis: currentDimension.axis,
+      value: parseInt(value)
+    })
+  }
+  drawChart([results]);
 }
