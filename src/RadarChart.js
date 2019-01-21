@@ -13,18 +13,18 @@ var RadarChart = {
         var cfg = {
             radius: 5,
             w: 900,
-            h: 600,
+            h: 800,
             factor: 1,
-            factorLegend: .85,
+            factorLegend: 1,
             levels: 3,
             maxValue: 0,
             radians: 2 * Math.PI,
             opacityArea: 0.5,
             ToRight: 5,
-            TranslateX: 80,
-            TranslateY: 30,
+            TranslateX: 150,
+            TranslateY: 90,
             ExtraWidthX: 100,
-            ExtraWidthY: 100,
+            ExtraWidthY: 200,
             color: d3.scale.category10()
         };
 
@@ -131,7 +131,7 @@ var RadarChart = {
                 return d
             })
             .style("font-family", "sans-serif")
-            .style("font-size", "11px")
+            .style("font-size", "14px")
             .attr("text-anchor", "middle")
             .attr("dy", "1.5em")
             .attr("transform", function (d, i) {
@@ -253,7 +253,7 @@ var RadarChart = {
         tooltip = g.append('text')
             .style('opacity', 0)
             .style('font-family', 'sans-serif')
-            .style('font-size', '13px');
+            .style('font-size', '1.2em');
     }
 };
 
@@ -333,15 +333,15 @@ var svg = d3.select('#body')
     .selectAll('svg')
     .append('svg')
     .attr("width", w + 300)
-    .attr("height", h)
+    .attr("height", h);
 
 //Create the title for the legend
 var text = svg.append("text")
     .attr("class", "title")
     .attr('transform', 'translate(90,0)')
     .attr("x", w - 70)
-    .attr("y", 10)
-    .attr("font-size", "12px")
+    .attr("y", 14)
+    .attr("font-size", "1.1em")
     .attr("fill", "#404040")
     .text("Tech Lead Assessment");
 
