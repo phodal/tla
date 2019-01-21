@@ -135,7 +135,7 @@ var RadarChart = {
         return "translate(0, -10)"
       })
       .attr("x", function (d, i) {
-        return cfg.w / 2 * (1 - cfg.factorLegend * Math.sin((chart0Length - i) * cfg.radians / total)) - 60 * Math.sin((chart0Length - i) * cfg.radians / total);
+        return cfg.w / 2 * (1 - cfg.factorLegend * Math.sin((chart0Length - i) * cfg.radians / total)) - 80 * Math.sin((chart0Length - i) * cfg.radians / total);
       })
       .attr("y", function (d, i) {
         return cfg.h / 2 * (1 - Math.cos(i * cfg.radians / total)) - 20 * Math.cos(i * cfg.radians / total);
