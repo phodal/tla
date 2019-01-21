@@ -42,6 +42,7 @@ function initForm() {
     sectionsHtml = sectionsHtml + '  <section>\n' +
       '    <label for="' + id + '">' + dimension + '</label>\n' +
       '    <input id="' + id + '" type="range" min="0" max="5" step="1" value="' + value + '" data-orientation="horizontal">\n' +
+      '    <span class="slide-result" id="' + id + '_span">' + value + '</span>' +
       '  </section>\n'
   }
 

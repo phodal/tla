@@ -8,6 +8,11 @@
   mix-blend-mode: multiply;
 }
 
+.slide-result {
+  float: right;
+  margin-right: 4px;
+}
+
 #input-section {
   top: 100px;
   display: block;
