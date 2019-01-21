@@ -257,86 +257,88 @@ var RadarChart = {
     }
 };
 
-var w = 500,
-    h = 500;
+function drawChart() {
 
-var colorscale = d3.scale.category10();
+  var w = 560,
+    h = 560;
+
+  var colorscale = d3.scale.category10();
 
 //Legend titles
-var LegendOptions = ['Current', 'Future'];
+  var LegendOptions = ['Current', 'Future'];
 
 //Data
-var d = [
+  var d = [
     [
-        {axis: "Emotional Intelligence", value: 5},
-        {axis: "Influencing", value: 4},
-        {axis: "Actively develops others", value: 3},
-        {axis: "Uses effective facilitation", value: 3},
-        {axis: "Actively builds team", value: 3},
-        {axis: "Active risk management", value: 2},
-        {axis: "Open communication", value: 5},
-        {axis: "Good coding skills", value: 4},
-        {axis: "Experience in full stack", value: 5},
-        {axis: "Pattern aware", value: 1},
-        {axis: "Current knowledge of codebase", value: 2},
-        {axis: "Continuous improvement", value: 3},
-        {axis: "Clarity of problem", value: 3},
-        {axis: "Business value focused", value: 4},
-        {axis: "Communication bridge", value: 4},
-        {axis: "Architectural vision", value: 3},
-        {axis: "Focus on principles", value: 5},
-        {axis: "Systems, not software", value: 5},
-        {axis: "Champions Cross-Functional Requirements", value: 5},
-        {axis: "Future thinking", value: 5}
+      {axis: "Emotional Intelligence", value: 5},
+      {axis: "Influencing", value: 4},
+      {axis: "Actively develops others", value: 3},
+      {axis: "Uses effective facilitation", value: 3},
+      {axis: "Actively builds team", value: 3},
+      {axis: "Active risk management", value: 2},
+      {axis: "Open communication", value: 5},
+      {axis: "Good coding skills", value: 4},
+      {axis: "Experience in full stack", value: 5},
+      {axis: "Pattern aware", value: 1},
+      {axis: "Current knowledge of codebase", value: 2},
+      {axis: "Continuous improvement", value: 3},
+      {axis: "Clarity of problem", value: 3},
+      {axis: "Business value focused", value: 4},
+      {axis: "Communication bridge", value: 4},
+      {axis: "Architectural vision", value: 3},
+      {axis: "Focus on principles", value: 5},
+      {axis: "Systems, not software", value: 5},
+      {axis: "Champions Cross-Functional Requirements", value: 5},
+      {axis: "Future thinking", value: 5}
     ], [
-        {axis: "Emotional Intelligence", value: 5},
-        {axis: "Influencing", value: 4},
-        {axis: "Actively develops others", value: 3},
-        {axis: "Uses effective facilitation", value: 3},
-        {axis: "Actively builds team", value: 3},
-        {axis: "Active risk management", value: 5},
-        {axis: "Open communication", value: 5},
-        {axis: "Good coding skills", value: 4},
-        {axis: "Experience in full stack", value: 5},
-        {axis: "Pattern aware", value: 3},
-        {axis: "Current knowledge of codebase", value: 3},
-        {axis: "Continuous improvement", value: 4},
-        {axis: "Clarity of problem", value: 4},
-        {axis: "Business value focused", value: 4},
-        {axis: "Communication bridge", value: 4},
-        {axis: "Architectural vision", value: 3},
-        {axis: "Focus on principles", value: 5},
-        {axis: "Systems, not software", value: 5},
-        {axis: "Champions Cross-Functional Requirements", value: 5},
-        {axis: "Future thinking", value: 5}
+      {axis: "Emotional Intelligence", value: 5},
+      {axis: "Influencing", value: 4},
+      {axis: "Actively develops others", value: 3},
+      {axis: "Uses effective facilitation", value: 3},
+      {axis: "Actively builds team", value: 3},
+      {axis: "Active risk management", value: 5},
+      {axis: "Open communication", value: 5},
+      {axis: "Good coding skills", value: 4},
+      {axis: "Experience in full stack", value: 5},
+      {axis: "Pattern aware", value: 3},
+      {axis: "Current knowledge of codebase", value: 3},
+      {axis: "Continuous improvement", value: 4},
+      {axis: "Clarity of problem", value: 4},
+      {axis: "Business value focused", value: 4},
+      {axis: "Communication bridge", value: 4},
+      {axis: "Architectural vision", value: 3},
+      {axis: "Focus on principles", value: 5},
+      {axis: "Systems, not software", value: 5},
+      {axis: "Champions Cross-Functional Requirements", value: 5},
+      {axis: "Future thinking", value: 5}
     ]
-];
+  ];
 
 //Options for the Radar chart, other than default
-var mycfg = {
+  var mycfg = {
     w: w,
     h: h,
     maxValue: 5,
     levels: 5,
     ExtraWidthX: 300
-};
+  };
 
 //Call function to draw the Radar chart
 //Will expect that data is in %'s
-RadarChart.draw("#chart", d, mycfg);
+  RadarChart.draw("#chart", d, mycfg);
 
 ////////////////////////////////////////////
 /////////// Initiate legend ////////////////
 ////////////////////////////////////////////
 
-var svg = d3.select('#body')
+  var svg = d3.select('#body')
     .selectAll('svg')
     .append('svg')
     .attr("width", w + 300)
     .attr("height", h);
 
 //Create the title for the legend
-var text = svg.append("text")
+  var text = svg.append("text")
     .attr("class", "title")
     .attr('transform', 'translate(90,0)')
     .attr("x", w - 70)
@@ -346,39 +348,40 @@ var text = svg.append("text")
     .text("Tech Lead Assessment");
 
 //Initiate Legend
-var legend = svg.append("g")
+  var legend = svg.append("g")
     .attr("class", "legend")
     .attr("height", 100)
     .attr("width", 200)
     .attr('transform', 'translate(90,20)')
-;
+  ;
 //Create colour squares
-legend.selectAll('rect')
+  legend.selectAll('rect')
     .data(LegendOptions)
     .enter()
     .append("rect")
     .attr("x", w - 65)
     .attr("y", function (d, i) {
-        return i * 20;
+      return i * 20;
     })
     .attr("width", 10)
     .attr("height", 10)
     .style("fill", function (d, i) {
-        return colorscale(i);
+      return colorscale(i);
     })
-;
+  ;
 //Create text next to squares
-legend.selectAll('text')
+  legend.selectAll('text')
     .data(LegendOptions)
     .enter()
     .append("text")
     .attr("x", w - 52)
     .attr("y", function (d, i) {
-        return i * 20 + 9;
+      return i * 20 + 9;
     })
     .attr("font-size", "11px")
     .attr("fill", "#737373")
     .text(function (d) {
-        return d;
+      return d;
     })
-;
+  ;
+}

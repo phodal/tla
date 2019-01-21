@@ -1,8 +1,9 @@
 var width = 900, height = 800;
 
 // Set-up the export button
-d3.select('#saveButton').on('click', function () {
-    var svgString = getSVGString(svg.node());
+d3.select('#saveButtonPng').on('click', function () {
+    let svg = d3.select('#body').selectAll('svg');
+    var svgString = getSVGString( svg.node());
     svgString2Image(svgString, 2 * width, 2 * height, 'png', save); // passes Blob and filesize String to the callback
 
     function save(dataBlob, filesize) {
