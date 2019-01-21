@@ -287,34 +287,34 @@ function drawChart(data) {
   var svg = d3.select('#body')
     .selectAll('svg')
     .append('svg')
-    .attr("width", w + 300)
-    .attr("height", h);
+    .attr("width", w + 400)
+    .attr("height", h + 300);
 
 //Create the title for the legend
   var text = svg.append("text")
     .attr("class", "title")
     .attr('transform', 'translate(90,0)')
-    .attr("x", w - 70)
-    .attr("y", 14)
+    .attr("x", 0)
+    .attr("y", h + 160)
     .attr("font-size", "1.1em")
     .attr("fill", "#404040")
     .text("Tech Lead Assessment");
 
-//Initiate Legend
+  // Initiate Legend
   var legend = svg.append("g")
     .attr("class", "legend")
     .attr("height", 100)
     .attr("width", 200)
     .attr('transform', 'translate(90,20)')
   ;
-//Create colour squares
+ // Create colour squares
   legend.selectAll('rect')
     .data(LegendOptions)
     .enter()
     .append("rect")
-    .attr("x", w - 65)
+    .attr("x", 4)
     .attr("y", function (d, i) {
-      return i * 20;
+      return h + i * 20 + 80;
     })
     .attr("width", 10)
     .attr("height", 10)
@@ -322,19 +322,43 @@ function drawChart(data) {
       return colorscale(i);
     })
   ;
-//Create text next to squares
+  // Create text next to squares
   legend.selectAll('text')
     .data(LegendOptions)
     .enter()
     .append("text")
-    .attr("x", w - 52)
+    .attr("x", 20)
     .attr("y", function (d, i) {
-      return i * 20 + 9;
+      return h + i * 20 + 80 + 9;
     })
     .attr("font-size", "11px")
     .attr("fill", "#737373")
     .text(function (d) {
       return d;
-    })
+    });
+
+  // Architect
+  svg.append("text")
+    .attr("x", 90)
+    .attr("y", 60)
+    .attr("font-size", "1.5em")
+    .attr("fill", "#000")
+    .text("Architect");
+
+  // Leadership
+  svg.append("text")
+    .attr("x", w + 90)
+    .attr("y", 60)
+    .attr("font-size", "1.5em")
+    .attr("fill", "#000")
+    .text("Leadership");
+
+  // Developer
+  svg.append("text")
+    .attr("x", w + 90)
+    .attr("y", h + 120)
+    .attr("font-size", "1.5em")
+    .attr("fill", "#000")
+    .text("Developer");
 }
 

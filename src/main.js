@@ -27,14 +27,14 @@ function initForm() {
   window.results = [];
   window.lastResult = [];
   var savedItems = window.localStorage.getItem('tla');
-  var lastrResults = window.localStorage.getItem('tla.last.results');
+  var lastResults = window.localStorage.getItem('tla.last.results');
   if (savedItems) {
     var parsedItems = JSON.parse(savedItems);
     drawChart(parsedItems);
     window.results = parsedItems;
   }
-  if (lastrResults) {
-    window.lastResults = JSON.parse(lastrResults);
+  if (lastResults) {
+    window.lastResults = JSON.parse(lastResults);
   }
 
   var sections = document.getElementById('sections');
