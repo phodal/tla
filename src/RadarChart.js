@@ -9,7 +9,7 @@
 //http://nbremer.blogspot.nl/2013/09/making-d3-radar-chart-look-bit-better.html
 
 var RadarChart = {
-  draw: function (id, d, options) {
+  draw: function (id, chartData, options) {
     var cfg = {
       radius: 5,
       w: 900,
@@ -35,12 +35,12 @@ var RadarChart = {
         }
       }
     }
-    cfg.maxValue = Math.max(cfg.maxValue, d3.max(d, function (i) {
+    cfg.maxValue = Math.max(cfg.maxValue, d3.max(chartData, function (i) {
       return d3.max(i.map(function (o) {
         return o.value;
       }))
     }));
-    var allAxis = (d[0].map(function (i, j) {
+    var allAxis = (chartData[0].map(function (i, j) {
       return i.axis
     }));
     var total = allAxis.length;
@@ -144,8 +144,7 @@ var RadarChart = {
         return cfg.h / 2 * (1 - Math.cos(i * cfg.radians / total)) - 20 * Math.cos(i * cfg.radians / total);
       });
 
-
-    d.forEach(function (y, x) {
+    chartData.forEach(function (y, x) {
       dataValues = [];
       g.selectAll(".nodes")
         .data(y, function (j, i) {
@@ -192,7 +191,7 @@ var RadarChart = {
     series = 0;
 
 
-    d.forEach(function (y, x) {
+    chartData.forEach(function (y, x) {
       g.selectAll(".nodes")
         .data(y).enter()
         .append("svg:circle")
@@ -258,16 +257,13 @@ var RadarChart = {
 };
 
 function drawChart(data) {
-
-  var w = 560,
-    h = 560;
-
+  var w = 560, h = 560;
   var colorscale = d3.scale.category10();
 
-//Legend titles
+ // Legend titles
   var LegendOptions = ['Current', 'Future'];
 
-//Options for the Radar chart, other than default
+  // Options for the Radar chart, other than default
   var mycfg = {
     w: w,
     h: h,
@@ -276,21 +272,20 @@ function drawChart(data) {
     ExtraWidthX: 300
   };
 
-//Call function to draw the Radar chart
-//Will expect that data is in %'s
+  // Call function to draw the Radar chart
+  // Will expect that data is in %'s
   RadarChart.draw("#chart", data, mycfg);
 
-////////////////////////////////////////////
-/////////// Initiate legend ////////////////
-////////////////////////////////////////////
-
+  ////////////////////////////////////////////
+  /////////// Initiate legend ////////////////
+  ////////////////////////////////////////////
   var svg = d3.select('#body')
     .selectAll('svg')
     .append('svg')
     .attr("width", w + 400)
     .attr("height", h + 300);
 
-//Create the title for the legend
+ // Create the title for the legend
   var text = svg.append("text")
     .attr("class", "title")
     .attr('transform', 'translate(90,0)')
