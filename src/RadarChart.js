@@ -35,11 +35,6 @@ var RadarChart = {
         }
       }
     }
-    cfg.maxValue = Math.max(cfg.maxValue, d3.max(chartData, function (i) {
-      return d3.max(i.map(function (o) {
-        return o.value;
-      }))
-    }));
     var allAxis = (chartData[0].map(function (i, j) {
       return i.axis
     }));
@@ -104,6 +99,8 @@ var RadarChart = {
         .text(Format((j + 1) * cfg.maxValue / cfg.levels));
     }
 
+    var chart0Length = chartData[0].length;
+
     series = 0;
 
     var axis = g.selectAll(".axis")
@@ -138,7 +135,7 @@ var RadarChart = {
         return "translate(0, -10)"
       })
       .attr("x", function (d, i) {
-        return cfg.w / 2 * (1 - cfg.factorLegend * Math.sin(i * cfg.radians / total)) - 60 * Math.sin(i * cfg.radians / total);
+        return cfg.w / 2 * (1 - cfg.factorLegend * Math.sin((chart0Length - i) * cfg.radians / total)) - 60 * Math.sin((chart0Length - i) * cfg.radians / total);
       })
       .attr("y", function (d, i) {
         return cfg.h / 2 * (1 - Math.cos(i * cfg.radians / total)) - 20 * Math.cos(i * cfg.radians / total);
@@ -149,8 +146,8 @@ var RadarChart = {
       g.selectAll(".nodes")
         .data(y, function (j, i) {
           dataValues.push([
-            cfg.w / 2 * (1 - (parseFloat(Math.max(j.value, 0)) / cfg.maxValue) * cfg.factor * Math.sin(i * cfg.radians / total)),
-            cfg.h / 2 * (1 - (parseFloat(Math.max(j.value, 0)) / cfg.maxValue) * cfg.factor * Math.cos(i * cfg.radians / total))
+            cfg.w / 2 * (1 - (parseFloat(Math.max(j.value, 0)) / cfg.maxValue) * cfg.factor * Math.sin((chart0Length - i) * cfg.radians / total)),
+            cfg.h / 2 * (1 - (parseFloat(Math.max(j.value, 0)) / cfg.maxValue) * cfg.factor * Math.cos((chart0Length - i) * cfg.radians / total))
           ]);
         });
       dataValues.push(dataValues[0]);
@@ -202,13 +199,13 @@ var RadarChart = {
         })
         .attr("cx", function (j, i) {
           dataValues.push([
-            cfg.w / 2 * (1 - (parseFloat(Math.max(j.value, 0)) / cfg.maxValue) * cfg.factor * Math.sin(i * cfg.radians / total)),
-            cfg.h / 2 * (1 - (parseFloat(Math.max(j.value, 0)) / cfg.maxValue) * cfg.factor * Math.cos(i * cfg.radians / total))
+            cfg.w / 2 * (1 - (parseFloat(Math.max(j.value, 0)) / cfg.maxValue) * cfg.factor * Math.sin((chart0Length - i) * cfg.radians / total)),
+            cfg.h / 2 * (1 - (parseFloat(Math.max(j.value, 0)) / cfg.maxValue) * cfg.factor * Math.cos((chart0Length - i) * cfg.radians / total))
           ]);
-          return cfg.w / 2 * (1 - (Math.max(j.value, 0) / cfg.maxValue) * cfg.factor * Math.sin(i * cfg.radians / total));
+          return cfg.w / 2 * (1 - (Math.max(j.value, 0) / cfg.maxValue) * cfg.factor * Math.sin((chart0Length - i) * cfg.radians / total));
         })
         .attr("cy", function (j, i) {
-          return cfg.h / 2 * (1 - (Math.max(j.value, 0) / cfg.maxValue) * cfg.factor * Math.cos(i * cfg.radians / total));
+          return cfg.h / 2 * (1 - (Math.max(j.value, 0) / cfg.maxValue) * cfg.factor * Math.cos((chart0Length - i) * cfg.radians / total));
         })
         .attr("data-id", function (j) {
           return j.axis
