@@ -19,7 +19,7 @@ var RadarChart = {
       levels: 3,
       maxValue: 0,
       radians: 2 * Math.PI,
-      opacityArea: 0.5,
+      opacityArea: 0.2,
       ToRight: 5,
       TranslateX: 150,
       TranslateY: 90,
@@ -156,7 +156,7 @@ var RadarChart = {
         .enter()
         .append("polygon")
         .attr("class", "radar-chart-serie" + series)
-        .style("stroke-width", "2px")
+        .style("stroke-width", "3px")
         .style("stroke", cfg.color(series))
         .attr("points", function (d) {
           var str = "";
@@ -176,7 +176,7 @@ var RadarChart = {
             .style("fill-opacity", 0.1);
           g.selectAll(z)
             .transition(200)
-            .style("fill-opacity", .7);
+            .style("fill-opacity", .4);
         })
         .on('mouseout', function () {
           g.selectAll("polygon")
