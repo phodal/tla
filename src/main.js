@@ -53,6 +53,7 @@ function initForm() {
     var value = 3;
     if (window.lastResults) {
       value = window.lastResults[id].value;
+      window.location.hash = generateHash(window.results);
     }
     sectionsHtml = sectionsHtml + '  <section>\n' +
       '    <label for="' + id + '">' + dimension + '</label>\n' +
@@ -91,7 +92,6 @@ function handleClick() {
   localStorage.setItem('tla', JSON.stringify(window.results));
   localStorage.setItem('tla.last.results', JSON.stringify(dimensions));
 
-  console.log(generateHash(window.results));
   window.location.hash = generateHash(window.results);
   drawChart(window.results);
 }
