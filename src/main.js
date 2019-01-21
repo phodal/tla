@@ -1,33 +1,6 @@
-var originDimensions = [
-  "Emotional Intelligence",
-  "Influencing",
-  "Actively develops others",
-  "Uses effective facilitation",
-  "Actively builds team",
-  "Active risk management",
-  "Open communication",
-  "Good coding skills",
-  "Experience in full stack",
-  "Pattern aware",
-  "Current knowledge of codebase",
-  "Continuous improvement",
-  "Clarity of problem",
-  "Business value focused",
-  "Communication bridge",
-  "Architectural vision",
-  "Focus on principles",
-  "Systems, not software",
-  "Champions Cross-Functional Requirements",
-  "Future thinking"
-];
-
-window.dimensionsArray = originDimensions;
-
 var dimensions = {};
 
-function initForm() {
-  window.results = [];
-  window.lastResult = [];
+function drawFromLocalStorage() {
   var savedItems = window.localStorage.getItem('tla');
   var lastResults = window.localStorage.getItem('tla.last.results');
   if (savedItems) {
@@ -37,6 +10,17 @@ function initForm() {
   }
   if (lastResults) {
     window.lastResults = JSON.parse(lastResults);
+  }
+}
+
+function initForm() {
+  window.results = [];
+  window.lastResult = [];
+
+  if (hasHash()) {
+    drawFromHash()
+  } else {
+    drawFromLocalStorage();
   }
 
   var sections = document.getElementById('sections');

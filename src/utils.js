@@ -119,7 +119,7 @@ function generateHash(resultsArray) {
   for (var i = 0; i < resultsArray.length; i++) {
     var results = resultsArray[i];
     hash = hash + '_';
-    for (var j = 0; j < results.length;j++) {
+    for (var j = 0; j < results.length; j++) {
       hash = hash + results[j].value
     }
   }
@@ -127,6 +127,60 @@ function generateHash(resultsArray) {
   return hash;
 }
 
-function parseHash(results) {
+function hasHash() {
+  var hashScores = window.location.hash.split('_');
+  if (hashScores[0] !== '#lta') {
+    return false;
+  }
 
+  return true;
+}
+
+function drawFromHash() {
+  var hashScores = window.location.hash.split('_');
+  if (hashScores[0] !== '#lta') {
+    return;
+  }
+
+  hashScores.shift();
+  var scores = [];
+  for (var i = 0; i < hashScores.length; i++) {
+    if (hashScores[i].length === originDimensions.length) {
+      scores.push(hashScores[i]);
+    }
+  }
+  if (scores.length < 0) {
+    return;
+  }
+
+  var results = [];
+  var lastResult = {};
+  for (var i = 0; i < scores.length; i++) {
+    var dimensions = [];
+    for (var j = 0; j < originDimensions.length; j++) {
+      var dimension = originDimensions[j];
+      var id = dimension.toLocaleLowerCase()
+        .replace(/,/g, "")
+        .replace(/ /g, "-");
+      dimensions.push({
+        id: id,
+        value: scores[i][j],
+        axis: dimension
+      });
+
+      if (i === scores.length - 1) {
+        lastResult[id] = {
+          id: id,
+          value: scores[i][j],
+          axis: dimension
+        }
+      }
+    }
+
+    results.push(dimensions);
+  }
+
+  window.results = results;
+  window.lastResults = lastResult;
+  drawChart(results);
 }
