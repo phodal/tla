@@ -112,8 +112,19 @@ function svgString2Image(svgString, width, height, format, callback) {
   image.src = imgsrc;
 }
 
-function generateHash(results) {
+var prefix = 'lta';
 
+function generateHash(resultsArray) {
+  var hash = prefix;
+  for (var i = 0; i < resultsArray.length; i++) {
+    var results = resultsArray[i];
+    hash = hash + '_';
+    for (var j = 0; j < results.length;j++) {
+      hash = hash + results[j].value
+    }
+  }
+
+  return hash;
 }
 
 function parseHash(results) {

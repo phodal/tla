@@ -21,6 +21,8 @@ var originDimensions = [
   "Future thinking"
 ];
 
+window.dimensionsArray = originDimensions;
+
 var dimensions = {};
 
 function initForm() {
@@ -89,5 +91,7 @@ function handleClick() {
   localStorage.setItem('tla', JSON.stringify(window.results));
   localStorage.setItem('tla.last.results', JSON.stringify(dimensions));
 
+  console.log(generateHash(window.results));
+  window.location.hash = generateHash(window.results);
   drawChart(window.results);
 }
