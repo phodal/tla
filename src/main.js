@@ -47,9 +47,21 @@ function initForm() {
   }
 
   sections.innerHTML = sectionsHtml;
+  window.dimensions = dimensions;
 }
 
 initForm();
+
+function bindSliderEvent() {
+  var arr = Object.keys(window.dimensions);
+  for (var i = 0; i < arr.length; i++) {
+    document.getElementById(arr[i]).addEventListener('change', function (result) {
+      document.getElementById(result.target.id + '_span').innerHTML = result.target.value;
+    })
+  }
+}
+
+bindSliderEvent();
 
 function handleClick() {
   event.preventDefault();
