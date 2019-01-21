@@ -6,7 +6,7 @@ d3.select('#saveButtonPng').on('click', function () {
   var svgString = getSVGString(svg.node());
   svgString2Image(svgString, 2 * width, 2 * height, 'png', save); // passes Blob and filesize String to the callback
 
-  function save(dataBlob, filesize) {
+  function save(dataBlob) {
     saveAs(dataBlob, 'tla.png');
   }
 });
@@ -70,7 +70,7 @@ function getSVGString(svgNode) {
     return extractedCSSText;
 
     function contains(str, arr) {
-      return arr.indexOf(str) === -1 ? false : true;
+      return arr.indexOf(str) !== -1;
     }
 
   }
@@ -86,8 +86,6 @@ function getSVGString(svgNode) {
 
 
 function svgString2Image(svgString, width, height, format, callback) {
-  var format = format ? format : 'png';
-
   var imgsrc = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString))); // Convert SVG string to data URL
 
   var canvas = document.createElement("canvas");
@@ -102,8 +100,8 @@ function svgString2Image(svgString, width, height, format, callback) {
     context.drawImage(image, 0, 0, width, height);
 
     canvas.toBlob(function (blob) {
-      var filesize = Math.round(blob.length / 1024) + ' KB';
-      if (callback) callback(blob, filesize);
+      var fileSize = Math.round(blob.length / 1024) + ' KB';
+      if (callback) callback(blob, fileSize);
     });
 
 
